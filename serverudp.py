@@ -11,44 +11,31 @@ firstDestUser = ""
 secondusername = ""
 secondDestUser = ""
 
-def server():
-	ServerMsg='Nice to	meet you :)	!'	
-	ServerSock=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)	
-	ServerSock.bind((hostip,hostPort))	
-	(ClientMsg,(ClientIP,ClientPort))=ServerSock.recvfrom(100)	
-	ServerSock.sendto(ServerMsg,(ClientIP,ClientPort))	
-	ServerSock.close()
+ServerMsg = "Nice to meet you!"	
+ServerSock=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)	
+ServerSock.bind	((hostIP,hostPort))	
+(ClientMsg,(ClientIP,ClientPort))= ServerSock.recvfrom(1024)
+ServerSock.sendto(ServerMsg,(ClientIP, ClientPort))
+ServerSock.close()
 
-	def register(originName,destName,mode):
-		#verificação do user
-		if firstusername == "":
-			firstusername = originName
-			firstDestUser = destName
-			
-		else:
-			secondusername = originName
-			secondDestUser = destName
+def register(originName,destName,mode):
+	#verificação do user
+	if firstusername == "":
+		firstusername = originName
+		firstDestUser = destName
+		
+	else:
+		secondusername = originName
+		secondDestUser = destName
 
-		#verificação do modo
-		if mode == modeserver:
-			#errormessage
-		else:
-			modeserver=mode
-			
-			
-			
-			
-			
-#	udp-server.py
+	#verificação do modo
+	if mode == modeserver:
+		#errormessage
+	else:
+		modeserver=mode
 
 
-import	socket
-ServerMsg	=	"Nice	to	meet	you		!"	
-ServerSock=socket.socket(socket.AF_INET,	socket.SOCK_DGRAM)	
-ServerSock.bind	(('',7006))	
-	(ClientMsg,	(ClientIP,	ClientPort))	=	ServerSock.recvfrom (1024)
-ServerSock.sendto(ServerMsg,	(ClientIP,	ClientPort))
-ServerSock.close ()
+
 
 	 
 
