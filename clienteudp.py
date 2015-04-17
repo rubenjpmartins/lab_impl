@@ -12,3 +12,13 @@ print "Message to erver: ", ClientMsg
 print "Message from server: ", ServerMsg
 ClientSock.close()
 
+#correcta
+
+import socket
+ClientSock=socket.socket(socket.AF_INET,	socket.SOCK_DGRAM)	
+ClientSock.sendto(Registery,	('localhost',	7006))
+print	("Message	to	server:	",	Registery)
+(ServerMsg,	(ServerIP,	ServerPort))	=	ClientSock.recvfrom (1024)	
+print	("Message from server: ",	ServerMsg)
+ClientSock.close ()
+
