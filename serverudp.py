@@ -24,7 +24,7 @@ def server():
 		if firstusername == "":
 			firstusername = originName
 			firstDestUser = destName
-			firstUserAddress = (socket.gethostbyname(),socket.())
+			
 		else:
 			secondusername = originName
 			secondDestUser = destName
