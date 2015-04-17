@@ -22,3 +22,18 @@ print	("Message	to	server:	",	Registery)
 print	("Message from server: ",	ServerMsg)
 ClientSock.close ()
 
+print("REGESTERY")
+print("From?")
+Input = raw_input()	#get the input from the user
+Registery =Input #create the registery msg
+print("To?")
+Input = raw_input()	#get the input from the user
+Registery = Registery +" "+Input #create the registery msg
+Input=""
+while  1: #need to put a right mode 
+	print("Mode W/R?")
+	Input = raw_input().upper()	#get the input from the user
+	print(Input)
+	if Input=="R":break
+	if Input=="W":break
+Registery = "R "+ Input+" " + Registery #create the registery msg
