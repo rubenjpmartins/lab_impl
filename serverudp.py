@@ -34,6 +34,21 @@ def server():
 			#errormessage
 		else:
 			modeserver=mode
+			
+			
+			
+			
+			
+#	udp-server.py
+
+
+import	socket
+ServerMsg	=	"Nice	to	meet	you		!"	
+ServerSock=socket.socket(socket.AF_INET,	socket.SOCK_DGRAM)	
+ServerSock.bind	(('',7006))	
+	(ClientMsg,	(ClientIP,	ClientPort))	=	ServerSock.recvfrom (1024)
+ServerSock.sendto(ServerMsg,	(ClientIP,	ClientPort))
+ServerSock.close ()
 
 	 
 
