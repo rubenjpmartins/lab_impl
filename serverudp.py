@@ -23,7 +23,7 @@ flag =0
 
 #Inicio de Variaveis  
 writerUsername  = ""
-receiverDestUser = ""
+reciverDestUser = ""
 
 #Inicio do Socket
 
@@ -35,7 +35,7 @@ ServerSock.bind	((hostIP,hostPort))
 
 while True:
 
-	print "estou a espera de uma mensagem"
+	print "estou a espera de mensagem"
 
 	(ClientMsg,(ClientIP,ClientPort))= ServerSock.recvfrom(1024) 
 
@@ -62,9 +62,9 @@ while True:
 				ServerSock.sendto("sender",(data[writerUsername][1], data[writerUsername][2]))
 			
 			else:
-				receiverDestUser=divideMsg[2]
+				reciverDestUser=divideMsg[2]
 				#Servidor envia a mensagem com o modo contrario pois ja existe um sender
-				ServerSock.sendto("receiver",(data[receiverDestUser][1], data[receiverDestUser][2]))
+				ServerSock.sendto("reciver",(data[reciverDestUser][1], data[reciverDestUser][2]))
 
 			print data
 
@@ -77,15 +77,15 @@ while True:
 			data[divideMsg[2]]=[divideMsg[3],ClientIP,ClientPort]
 
 			# Para saber se ja existe um user com o mesmo modo
-			if receiverDestUser == "":
+			if reciverDestUser == "":
 				#nome do leitor
-				receiverDestUser=divideMsg[2]
+				reciverDestUser=divideMsg[2]
 				#Servidor envia a mensagem - Registo ok
-				ServerSock.sendto("receiver",(data[receiverDestUser][1], data[receiverDestUser][2]))
+				ServerSock.sendto("reciver",(data[reciverDestUser][1], data[reciverDestUser][2]))
 			
 			else:
 				writerUsername=divideMsg[2]
-				#Servidor envia a mensagem com o modo contrario pois ja existe um receiver
+				#Servidor envia a mensagem com o modo contrario pois ja existe um reciver
 				ServerSock.sendto("sender",(data[writerUsername][1], data[writerUsername][2]))
 				
 			print data
@@ -97,7 +97,7 @@ while True:
 		print divideMsg
 		
 		# Se o outro user n tiver registado
-		if receiverDestUser == "":
+		if reciverDestUser == "":
 			# opcode 4 - Reconhecimento de mensagem enviada (MSG ACK); 
 			print "6 Reconhecimento de mensagem nao enviada (ERRO)"
 			ServerSock.sendto("6 Reconhecimento de mensagem nao enviada (ERRO)",(data[writerUsername][1], data[writerUsername][2]))	
@@ -108,7 +108,7 @@ while True:
 			if flag==0:
 				ClientMsg = "8 - o utilizador saiu"
 				#envio de mesagem para o outro user a avisar da saida do utilizador
-				ServerSock.sendto(ClientMsg,(data[receiverDestUser][1], data[receiverDestUser][2]))
+				ServerSock.sendto(ClientMsg,(data[reciverDestUser][1], data[reciverDestUser][2]))
 				#envio de mesagem para o user com o opcode 7
 				ServerSock.sendto("7 - ADEUS",(data[writerUsername][1], data[writerUsername][2]))
 				print "7 - Cliente Desligou"
@@ -121,23 +121,23 @@ while True:
 		else:
 			# opcode 3 - envio de mensagem para o outro user	
 			print "3 Mensagem"		
-			ServerSock.sendto(ClientMsg,(data[receiverDestUser][1], data[receiverDestUser][2]))
+			ServerSock.sendto(ClientMsg,(data[reciverDestUser][1], data[reciverDestUser][2]))
 			# opcode 4 - Reconhecimento de mensagem enviada (MSG ACK); 
 			print "4 MSG ACK"
 			ServerSock.sendto("4 ENVIO DE MENSAGEM - MSG ACK",(data[writerUsername][1], data[writerUsername][2]))
 			
 			# opcode 5 - Recebe confirmacao do user
-			(ClientMsg,(data[receiverDestUser][1],data[receiverDestUser][2]))= ServerSock.recvfrom(1024)
+			(ClientMsg,(data[reciverDestUser][1],data[reciverDestUser][2]))= ServerSock.recvfrom(1024)
 
 			print ClientMsg
 
 			# faz a troca apos envio de mensagens
 			username1 = data[writerUsername][1] 
 			username2 = data[writerUsername][2] 
-			data[writerUsername][1] = data[receiverDestUser][1]
-			data[writerUsername][2] = data[receiverDestUser][2]
-			data[receiverDestUser][1] = username1
-			data[receiverDestUser][2] = username2
+			data[writerUsername][1] = data[reciverDestUser][1]
+			data[writerUsername][2] = data[reciverDestUser][2]
+			data[reciverDestUser][1] = username1
+			data[reciverDestUser][2] = username2
 
 
 
